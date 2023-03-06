@@ -8,7 +8,7 @@ function formatDate(timestamp){
       }
     let min = date.getMinutes();
     if (min < 10) {
-        minu = `0${min}`;
+        min = `0${min}`;
       }
     return `${day} ${hour}:${min}`;
 }
