@@ -27,9 +27,13 @@ function displayTemperature(respone){
     wind.innerHTML=Math.round(respone.data.wind.speed);
     let date = document.querySelector("#date");
     date.innerHTML = formatDate(respone.data.dt * 1000);
+    let icon = document.querySelector("#icon");
+    icon.setAttribute("src",`http://openweathermap.org/img/wn/${respone.data.weather[0].icon}@2x.png`);
+    icon.setAttribute("alt", respone.data.weather[0].description);
 }
 
 let apiKey = "aca4dd3643b89e94dbd3cac6cf6f2638";
-let apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=New York&appid=${apiKey}&units=metric`;
+let cityName="New York"
+let apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
 console.log(apiUrl);
 axios.get(apiUrl).then(displayTemperature);
