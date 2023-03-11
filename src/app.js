@@ -29,6 +29,7 @@ function displayTemperature(respone){
     let icon = document.querySelector("#icon");
     icon.setAttribute("src",`http://openweathermap.org/img/wn/${respone.data.weather[0].icon}@2x.png`);
     icon.setAttribute("alt", respone.data.weather[0].description);
+    celciusTemperature = respone.data.main.temp;
 }
 
 function search(city){
@@ -44,7 +45,32 @@ function handelSubmit(event){
   
 }
 
-search("New York")
+function displayFahrenheit(event){
+  event.preventDefault();
+  celsius.classList.remove("active");
+  fahrenheit1.classList.add("active");
+  let temperature = document.querySelector("#temperature");
+  let fahrenheit = (celciusTemperature * 9) / 5 + 32;
+  temperature.innerHTML = Math.round(fahrenheit);
+}
 
+function displayCelsius(event){
+  event.preventDefault();
+  celsius.classList.add("active");
+  fahrenheit1.classList.remove("active");
+  let temperature = document.querySelector("#temperature");
+  temperature.innerHTML = Math.round(celciusTemperature);
+}
+
+
+let celciusTemperature = null;
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handelSubmit);
+
+let fahrenheit1=document.querySelector("#fahrenheit");
+fahrenheit1.addEventListener("click",displayFahrenheit);
+
+let celsius = document.querySelector("#celsius");
+celsius.addEventListener("click",displayCelsius);
+
+search("Bushehr");
